@@ -42,12 +42,12 @@ class Crawler:
                                   columns=['pName', 'tradePrice', 'actualPrice', 'salePrice', 'brand', 'productLine',
                                            'rating',
                                            'technicalDetail', 'url'])
-        df_devices.to_csv("phones.csv", index=True)
+        df_devices.to_csv("../crawled_data/phones.csv", index=True)
         for product in products:
             productLink = product.find("a").get("href")
             device = PhoneCrawler(productLink)
             device_info = device.getInfo()
-            with open("phones.csv", "a", newline="", encoding="utf-8") as file:
+            with open("crawled_data/phones.csv", "a", newline="", encoding="utf-8") as file:
                 pd.DataFrame([device_info]).to_csv(file, header=False, index=True, mode='a')
 
 

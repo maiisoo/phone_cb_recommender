@@ -9,18 +9,17 @@ import re
 class PhoneCrawler():
     def __init__(self, url):
         self.url = url
-        self.driver = webdriver.Chrome("C:/Downloads/chromedriver.exe")
+        self.driver = webdriver.Chrome("../chromedriver.exe")
 
     def getTechnicalInfo(self):
-        # Maximum number of scroll attempts before giving up
+        # The technical details of products is shown on a popup table after clicking the button
         global technicalDetailButton
         max_scroll_attempts = 10
 
-        # Scroll down function
         def scroll_down():
             self.driver.execute_script("window.scrollBy(0, window.innerHeight);")
 
-        # Wait for the element to become visible or present
+        # Wait for the element to present
         wait = WebDriverWait(self.driver, 2)
 
         scroll_attempts = 0
@@ -36,11 +35,6 @@ class PhoneCrawler():
                 scroll_down()
                 scroll_attempts += 1
 
-        # If the loop finishes without finding the element
-        # if scroll_attempts == max_scroll_attempts:
-        #     print("Element not found after scrolling.")
-        # else:
-        #     print("Element found. Continuing with further actions.")
 
         try:
             self.driver.execute_script("arguments[0].click();", technicalDetailButton)
